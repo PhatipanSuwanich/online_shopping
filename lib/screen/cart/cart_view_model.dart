@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:online_shopping/model/product_items_model.dart';
 
 class CartViewModel extends GetxController {
@@ -39,5 +40,13 @@ class CartViewModel extends GetxController {
 
   int getItemQuantity(ProductItems product) {
     return cartItems[product] ?? 0;
+  }
+
+  String calculateTotalPrice() {
+    double total = 0;
+    cartItems.forEach((product, quantity) {
+      total += product.price! * quantity;
+    });
+    return NumberFormat.currency(locale: "en_US", symbol: "\$").format(total);
   }
 }

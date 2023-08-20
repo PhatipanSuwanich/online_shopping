@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:online_shopping/model/product_items_model.dart';
@@ -77,12 +78,18 @@ class ProductDetailView extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       IconButton(
+                        icon: quantity == 1
+                            ? const FaIcon(
+                                FontAwesomeIcons.trashCan,
+                                color: Colors.red,
+                              )
+                            : const FaIcon(
+                                FontAwesomeIcons.squareMinus,
+                                color: Colors.red,
+                              ),
                         onPressed: () {
-                          // Decrease the quantity
                           cartViewModel.decreaseQuantity(product);
                         },
-                        icon: const Icon(Icons.remove),
-                        color: Colors.red,
                       ),
                       Expanded(
                         child: Text(
@@ -91,11 +98,13 @@ class ProductDetailView extends StatelessWidget {
                         ),
                       ),
                       IconButton(
+                        icon: const FaIcon(
+                          FontAwesomeIcons.squarePlus,
+                          color: Colors.brown,
+                        ),
                         onPressed: () {
-                          // Increase the quantity
                           cartViewModel.increaseQuantity(product);
                         },
-                        icon: const Icon(Icons.add),
                       ),
                     ],
                   ),
