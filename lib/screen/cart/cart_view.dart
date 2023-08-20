@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -20,11 +21,23 @@ class CartView extends StatelessWidget {
             final product = cartViewModel.cartItems.keys.toList()[index];
             final quantity = cartViewModel.getItemQuantity(product);
 
-            return Dismissible(
+            return Slidable(
               key: Key(product.id.toString()),
-              onDismissed: (_) {
-                cartViewModel.removeFromCart(product);
-              },
+              endActionPane: ActionPane(
+                extentRatio: 0.25,
+                motion: const StretchMotion(),
+                children: [
+                  SlidableAction(
+                    onPressed: (context) {
+                      cartViewModel.removeFromCart(product);
+                    },
+                    backgroundColor: Colors.red,
+                    foregroundColor: Colors.white,
+                    icon: FontAwesomeIcons.trashCan,
+                    label: 'Delete',
+                  ),
+                ],
+              ),
               child: Card(
                 child: ListTile(
                   leading: SizedBox(
@@ -75,25 +88,28 @@ class CartView extends StatelessWidget {
             );
           },
         ),
-        bottomNavigationBar: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Total : ${cartViewModel.calculateTotalPrice()}',
-                style: const TextStyle(fontSize: 18),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  // Navigate to checkout page
-                },
-                style: ElevatedButton.styleFrom(backgroundColor: Theme.of(context).primaryColor),
-                child: const Text('Checkout'),
-              ),
-            ],
-          ),
-        ),
+        bottomNavigationBar: cartViewModel.cartItems.isNotEmpty
+            ? Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Total : ${cartViewModel.calculateTotalPrice()}',
+                      style: const TextStyle(fontSize: 18),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        // Navigate to checkout page
+                      },
+                      style:
+                          ElevatedButton.styleFrom(backgroundColor: Theme.of(context).primaryColor),
+                      child: const Text('Checkout'),
+                    ),
+                  ],
+                ),
+              )
+            : const SizedBox(),
       );
     });
   }
