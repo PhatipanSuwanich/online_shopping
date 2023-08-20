@@ -4,7 +4,7 @@ import 'package:online_shopping/screen/market/market_view_model.dart';
 import 'package:online_shopping/screen/share/widget/product_card.dart';
 
 class MarketView extends StatelessWidget {
-  final ProductViewModel productController = Get.find<ProductViewModel>();
+  final ProductViewModel productViewModel = Get.find<ProductViewModel>();
 
   MarketView({super.key});
 
@@ -22,7 +22,7 @@ class MarketView extends StatelessWidget {
         ),
       ),
       body: Obx(() {
-        final products = productController.products;
+        final products = productViewModel.products;
         return GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
