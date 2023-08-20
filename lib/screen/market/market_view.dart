@@ -14,11 +14,6 @@ class MarketView extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           'For You',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 25,
-            fontWeight: FontWeight.bold,
-          ),
         ),
       ),
       body: Obx(() {

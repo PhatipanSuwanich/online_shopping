@@ -24,7 +24,7 @@ class FavoriteButtonState extends State<FavoriteButton> {
           : const Icon(Icons.favorite_border),
       onPressed: () {
         final productController = Get.find<ProductViewModel>();
-        productController.toggleSave(widget.product.id!);
+        productController.toggleSave(widget.product.id!, context);
         setState(() {});
       },
     );

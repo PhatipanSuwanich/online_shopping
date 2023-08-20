@@ -61,13 +61,13 @@ class ProductDetailView extends StatelessWidget {
                     Get.snackbar(
                       'Cart',
                       '${product.name} added to cart',
-                      backgroundColor: Colors.brown.shade300,
+                      backgroundColor: Theme.of(context).primaryColor,
                       duration: const Duration(milliseconds: 800),
                     );
                     cartViewModel.addToCart(product);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.brown.shade300,
+                    backgroundColor: Theme.of(context).primaryColor,
                     minimumSize: Size(Get.width, 60),
                   ),
                   child: const Text('Add to Cart'),

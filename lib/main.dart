@@ -14,15 +14,22 @@ void main() async {
     GetMaterialApp(
       home: const HomeView(),
       theme: ThemeData(
-          appBarTheme: const AppBarTheme(
-            centerTitle: false,
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            iconTheme: IconThemeData(
-              color: Colors.black, //change your color here
-            ),
+        appBarTheme: const AppBarTheme(
+          centerTitle: false,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          iconTheme: IconThemeData(
+            color: Colors.black, //change your color here
           ),
-          primaryColor: Colors.grey.shade800),
+          titleTextStyle: TextStyle(
+            color: Colors.black,
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        primaryColor: Colors.brown.shade300,
+        scaffoldBackgroundColor: Colors.grey.shade200,
+      ),
     ),
   );
 }

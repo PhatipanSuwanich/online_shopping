@@ -21,14 +21,14 @@ class ProductViewModel extends GetxController {
     products.value = productItemsModel.productItems!;
   }
 
-  void toggleSave(int productId) {
+  void toggleSave(int productId,BuildContext context) {
     final product = products.firstWhere((p) => p.id == productId);
     product.isSaved = !product.isSaved!;
     final status = product.isSaved! ? 'Saved' : 'Unsaved';
     Get.snackbar(
       status,
       product.name!,
-      backgroundColor: Colors.brown.shade300,
+      backgroundColor: Theme.of(context).primaryColor,
       duration: const Duration(milliseconds: 800),
     );
     products.refresh();

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:online_shopping/screen/cart/cart_view.dart';
 import 'package:online_shopping/screen/home/home_view_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:online_shopping/screen/market/market_view.dart';
@@ -16,7 +17,7 @@ class HomeView extends StatelessWidget {
         body: [
           MarketView(),
           SaveView(),
-          Container(color: Colors.yellow),
+          CartView(),
         ].elementAt(homeViewModel.selectedIndex.value),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
@@ -38,8 +39,8 @@ class HomeView extends StatelessWidget {
           onTap: (index) {
             homeViewModel.selectedIndex.value = index;
           },
-          selectedItemColor: Colors.brown[300],
-          selectedIconTheme: IconThemeData(color: Colors.brown[300]),
+          selectedItemColor: Theme.of(context).primaryColor,
+          selectedIconTheme: IconThemeData(color: Theme.of(context).primaryColor),
           selectedFontSize: 14,
           unselectedIconTheme: const IconThemeData(color: Colors.grey),
           unselectedItemColor: Colors.grey,
