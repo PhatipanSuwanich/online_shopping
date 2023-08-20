@@ -8,5 +8,16 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Get.put(HomeViewModel());
   Get.put(ProductViewModel());
-  runApp(const GetMaterialApp(home: HomeView()));
+  runApp(
+    GetMaterialApp(
+      home: const HomeView(),
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          centerTitle: false,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+      ),
+    ),
+  );
 }
