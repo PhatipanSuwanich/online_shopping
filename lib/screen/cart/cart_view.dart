@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:online_shopping/screen/cart/cart_view_model.dart';
+import 'package:online_shopping/screen/checkout/checkout_view.dart';
 
 class CartView extends StatelessWidget {
   final CartViewModel cartViewModel = Get.find<CartViewModel>();
@@ -95,12 +96,13 @@ class CartView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Total : ${cartViewModel.calculateTotalPrice()}',
+                      'Total : ${NumberFormat.currency(locale: "en_US", symbol: "\$").format(cartViewModel.calculateTotalPrice())}',
                       style: const TextStyle(fontSize: 18),
                     ),
                     ElevatedButton(
                       onPressed: () {
                         // Navigate to checkout page
+                        Get.to(CheckoutView());
                       },
                       style:
                           ElevatedButton.styleFrom(backgroundColor: Theme.of(context).primaryColor),
