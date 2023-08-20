@@ -1,17 +1,23 @@
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:online_shopping/model/product_items_model.dart';
 
 class ProductViewModel extends GetxController {
   final products = <ProductItems>[].obs;
-  
+
   @override
   void onInit() {
     loadMockAPI();
     super.onInit();
   }
 
-  loadMockAPI(){
-    // products.value = ProductItems.fromJson(Mock)
+  loadMockAPI() async {
+    final String mockResponse = await rootBundle.loadString('assets/mock_product_items.json');
+    final jsonData = await json.decode(mockResponse);
+    final ProductItemsModel productItemsModel = ProductItemsModel.fromJson(jsonData);
+    products.value = productItemsModel.productItems!;
   }
 
 // void toggleSave(int productId) {
