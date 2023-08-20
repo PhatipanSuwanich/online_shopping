@@ -26,13 +26,10 @@ class MarketView extends StatelessWidget {
         return GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
-            mainAxisSpacing: 16.0,
-            crossAxisSpacing: 16.0,
           ),
           itemCount: products.length,
           itemBuilder: (context, index) {
-            final product = products[index];
-            return ProductCard(product: product);
+            return ProductCard(product: products[index]);
           },
         );
       }),
@@ -48,20 +45,38 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      margin: const EdgeInsets.fromLTRB(10, 0, 10, 7),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.network(product.imageUrl!),
-          Text(product.name!),
+          Stack(
+            alignment: AlignmentDirectional.topEnd,
+            children: [
+              Container(
+                constraints: BoxConstraints(
+                  minHeight: 120,
+                  minWidth: Get.width,
+                  maxHeight: 130,
+                ),
+                child: Image.network(
+                  product.imageUrl!,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              IconButton(
+                icon: product.isSaved!
+                    ? const Icon(Icons.favorite, color: Colors.red)
+                    : const Icon(Icons.favorite_border),
+                onPressed: () {
+                  final productController = Get.find<ProductViewModel>();
+                  productController.toggleSave(product.id!);
+                },
+              ),
+            ],
+          ),
+          const SizedBox(height: 4),
+          Text(product.name!, maxLines: 2),
           Text('${product.price}'),
-          // IconButton(
-          //   icon: Obx(() => Icon(product.isSaved.value ? Icons.favorite : Icons.favorite_border)),
-          //   onPressed: () {
-          //     final productController = Get.find<ProductController>();
-          //     productController.toggleSave(product.id!);
-          //     final message = product.isSaved.value ? 'Item saved' : 'Item unsaved';
-          //     Get.snackbar('Status', message);
-          //   },
-          // ),
         ],
       ),
     );

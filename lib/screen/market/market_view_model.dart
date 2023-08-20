@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:online_shopping/model/product_items_model.dart';
@@ -20,8 +21,11 @@ class ProductViewModel extends GetxController {
     products.value = productItemsModel.productItems!;
   }
 
-// void toggleSave(int productId) {
-//   final product = products.firstWhere((p) => p.id == productId);
-//   product.isSaved.value = !product.isSaved.value;
-// }
+  void toggleSave(int productId) {
+    final product = products.firstWhere((p) => p.id == productId);
+    product.isSaved = !product.isSaved!;
+    final status = product.isSaved! ? 'Saved' : 'Unsaved';
+    Get.snackbar(status, product.name!, backgroundColor: Colors.brown.shade300);
+    products.refresh();
+  }
 }
