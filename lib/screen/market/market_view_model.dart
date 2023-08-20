@@ -25,7 +25,16 @@ class ProductViewModel extends GetxController {
     final product = products.firstWhere((p) => p.id == productId);
     product.isSaved = !product.isSaved!;
     final status = product.isSaved! ? 'Saved' : 'Unsaved';
-    Get.snackbar(status, product.name!, backgroundColor: Colors.brown.shade300);
+    Get.snackbar(
+      status,
+      product.name!,
+      backgroundColor: Colors.brown.shade300,
+      duration: const Duration(milliseconds: 800),
+    );
     products.refresh();
+  }
+
+  List<ProductItems> getSavedProducts() {
+    return products.where((product) => product.isSaved!).toList();
   }
 }

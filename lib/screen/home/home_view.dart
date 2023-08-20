@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:online_shopping/screen/home/home_view_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:online_shopping/screen/market/market_view.dart';
+import 'package:online_shopping/screen/saved/saved_view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class HomeView extends StatelessWidget {
       () => Scaffold(
         body: [
           MarketView(),
-          Container(color: Colors.green),
+          SaveView(),
           Container(color: Colors.yellow),
         ].elementAt(homeViewModel.selectedIndex.value),
         bottomNavigationBar: BottomNavigationBar(
