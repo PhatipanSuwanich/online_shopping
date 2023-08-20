@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:online_shopping/model/product_items_model.dart';
 import 'package:online_shopping/screen/market/market_view_model.dart';
 
@@ -22,7 +23,7 @@ class ProductCard extends StatelessWidget {
                 constraints: BoxConstraints(
                   minHeight: 120,
                   minWidth: Get.width,
-                  maxHeight: 130,
+                  maxHeight: 120,
                 ),
                 child: Image.network(
                   product.imageUrl!,
@@ -41,8 +42,16 @@ class ProductCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 4),
-          Text(product.name!, maxLines: 2),
-          Text('${product.price}'),
+          Text(
+            product.name!,
+            maxLines: 2,
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            NumberFormat.currency(locale: "en_US", symbol: "\$").format(product.price),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
         ],
       ),
     );
