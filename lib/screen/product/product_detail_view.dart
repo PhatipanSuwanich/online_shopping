@@ -51,16 +51,56 @@ class ProductDetailView extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: ElevatedButton(
-        onPressed: () {
-          cartViewModel.addToCart(product);
-          Get.snackbar('Cart', 'Item added to cart');
+      bottomNavigationBar: Obx(
+        () {
+          int quantity = cartViewModel.getItemQuantity(product);
+          return quantity == 0
+              ? ElevatedButton(
+                  onPressed: () {
+                    // Add the product to the cart with quantity = 1
+                    Get.snackbar(
+                      'Cart',
+                      '${product.name} added to cart',
+                      backgroundColor: Colors.brown.shade300,
+                      duration: const Duration(milliseconds: 800),
+                    );
+                    cartViewModel.addToCart(product);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.brown.shade300,
+                    minimumSize: Size(Get.width, 60),
+                  ),
+                  child: const Text('Add to Cart'),
+                )
+              : SafeArea(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          // Decrease the quantity
+                          cartViewModel.decreaseQuantity(product);
+                        },
+                        icon: const Icon(Icons.remove),
+                        color: Colors.red,
+                      ),
+                      Expanded(
+                        child: Text(
+                          quantity.toString(),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          // Increase the quantity
+                          cartViewModel.increaseQuantity(product);
+                        },
+                        icon: const Icon(Icons.add),
+                      ),
+                    ],
+                  ),
+                );
         },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.brown.shade300,
-          minimumSize: Size(Get.width, 60),
-        ),
-        child: const Text('Add to Cart'),
       ),
     );
   }

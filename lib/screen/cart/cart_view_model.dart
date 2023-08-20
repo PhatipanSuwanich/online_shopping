@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:online_shopping/model/product_items_model.dart';
 
 class CartViewModel extends GetxController {
-  final cartItems = <ProductItems>[].obs;
+  final cartItems = <ProductItems, int>{}.obs;
 
   @override
   void onInit() {
@@ -10,14 +10,34 @@ class CartViewModel extends GetxController {
   }
 
   void addToCart(ProductItems product) {
-    cartItems.add(product);
+    cartItems[product] = 1;
+    update();
   }
 
   void removeFromCart(ProductItems product) {
     cartItems.remove(product);
+    update();
   }
 
-  double getTotalPrice() {
-    return cartItems.fold(0.0, (total, product) => total + product.price!);
+  void increaseQuantity(ProductItems product) {
+    if (cartItems.containsKey(product)) {
+      cartItems[product] = cartItems[product]! + 1;
+      update();
+    }
+  }
+
+  void decreaseQuantity(ProductItems product) {
+    if (cartItems.containsKey(product)) {
+      if (cartItems[product]! > 1) {
+        cartItems[product] = cartItems[product]! - 1;
+        update();
+      } else {
+        removeFromCart(product);
+      }
+    }
+  }
+
+  int getItemQuantity(ProductItems product) {
+    return cartItems[product] ?? 0;
   }
 }
