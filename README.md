@@ -55,7 +55,6 @@ Welcome to **My Shopping App**! This app allows you to explore products, save yo
 
 - [GetX](https://pub.dev/packages/get)
 - [qr_flutter](https://pub.dev/packages/qr_flutter)
-- [cached_network_image](https://pub.dev/packages/cached_network_image)
 - [font_awesome_flutter](https://pub.dev/packages/font_awesome_flutter)
 - [intl](https://pub.dev/packages/intl)
 - [flutter_slidable](https://pub.dev/packages/flutter_slidable)
