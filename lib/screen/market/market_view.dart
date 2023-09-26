@@ -15,6 +15,14 @@ class MarketView extends StatelessWidget {
         title: const Text(
           'For You',
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              productViewModel.sortPriceProducts();
+            },
+            icon: const Icon(Icons.price_change_outlined),
+          ),
+        ],
       ),
       body: Obx(() {
         final products = productViewModel.products;

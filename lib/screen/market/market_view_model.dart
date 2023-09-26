@@ -37,4 +37,9 @@ class ProductViewModel extends GetxController {
   List<ProductItems> getSavedProducts() {
     return products.where((product) => product.isSaved!).toList();
   }
+
+  void sortPriceProducts() {
+    products.sort((a,b) => a.price!.compareTo(b.price!));
+    products.refresh();
+  }
 }
